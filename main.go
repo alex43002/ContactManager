@@ -5,10 +5,6 @@ import "os"
 import "os/exec"
 import "strings"
 
-type Contact struct {
-	Name string
-	Phone string
-}
 
 func clearScreen(){
 	cmd := exec.Command("clear")

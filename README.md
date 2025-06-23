@@ -23,6 +23,6 @@ Allows you to add, list, and search contacts by name.
 
     *or to build an executable:*
     ```sh
-    go build .  # creates ContactManager.exe
+    go build .  # creates contactManager.exe
     ```
 

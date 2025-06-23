@@ -1,3 +1,3 @@
-module contactBook
+module contactManager
 
 go 1.24.4
