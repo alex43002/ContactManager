@@ -1,0 +1,50 @@
+name: Go CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24.4'
+
+    - name: Download Go modules
+      run: go mod download
+
+    - name: Run tests with coverage
+      run: |
+        go test -v -covermode=atomic -coverprofile=coverage.out ./...
+        # Fail if coverage < 100%
+        coverage=$(go tool cover -func=coverage.out | grep total: | awk '{print substr($3, 1, length($3)-1)}')
+        if [ "$(printf "%.0f" "$coverage")" -lt 100 ]; then
+          echo "Coverage ($coverage%) is less than 100%!"
+          exit 1
+        fi
+
+    - name: Upload coverage report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-${{ matrix.os }}
+        path: coverage.out
+
+    - name: Print coverage report
+      run: go tool cover -func=coverage.out
+
+
