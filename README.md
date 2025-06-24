@@ -5,7 +5,7 @@ Allows you to add, list, and search contacts by name.
 
 ## Prerequisites
 
-- [Go](https://go.dev/dl/) (version 1.18 or newer recommended)
+- [Go](https://go.dev/dl/) (version 1.24 or newer recommended)
 - (Optional) Unix-based system for `clear` command; on Windows, replace `"clear"` with `"cls"` in `clearScreen()` if needed.
 
 ## How to Run
@@ -18,7 +18,7 @@ Allows you to add, list, and search contacts by name.
 
 2. **Build and run**
     ```sh
-    go run .
+    go run cmd/contactmanager/main.go
     ```
 
     *or to build an executable:*
