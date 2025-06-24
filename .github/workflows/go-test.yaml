@@ -37,6 +37,7 @@ jobs:
         fi
 
     - name: Upload coverage report
+      shell: bash
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -44,7 +45,9 @@ jobs:
         path: coverage.out
 
     - name: Print coverage report
+      shell: bash
       run: go tool cover -func=coverage.out
 
     - name: Run end-to-end CLI test
+      shell: bash
       run: go test ./test/...
