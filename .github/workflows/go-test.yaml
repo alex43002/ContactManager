@@ -26,6 +26,7 @@ jobs:
       run: go mod download
 
     - name: Run unit tests with coverage
+      shell: bash
       run: |
         go test -v -covermode=atomic -coverprofile=coverage.out ./internal/contacts
         # Fail if coverage < 100%
