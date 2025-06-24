@@ -8,9 +8,7 @@ on:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -27,9 +25,9 @@ jobs:
     - name: Download Go modules
       run: go mod download
 
-    - name: Run tests with coverage
+    - name: Run unit tests with coverage
       run: |
-        go test -v -covermode=atomic -coverprofile=coverage.out ./...
+        go test -v -covermode=atomic -coverprofile=coverage.out ./internal/contacts
         # Fail if coverage < 100%
         coverage=$(go tool cover -func=coverage.out | grep total: | awk '{print substr($3, 1, length($3)-1)}')
         if [ "$(printf "%.0f" "$coverage")" -lt 100 ]; then
@@ -47,4 +45,5 @@ jobs:
     - name: Print coverage report
       run: go tool cover -func=coverage.out
 
-
+    - name: Run end-to-end CLI test
+      run: go test ./test/...

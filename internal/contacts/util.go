@@ -6,9 +6,9 @@ import (
     "runtime"
 )
 
-func ClearScreen() {
+func clearScreenForOS(goos string) {
     var cmd *exec.Cmd
-    if runtime.GOOS == "windows" {
+    if goos == "windows" {
         cmd = exec.Command("cmd", "/c", "cls")
     } else {
         cmd = exec.Command("clear")
@@ -17,3 +17,7 @@ func ClearScreen() {
     cmd.Run()
 }
 
+// Production use
+func ClearScreen() {
+    clearScreenForOS(runtime.GOOS)
+}
