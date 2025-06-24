@@ -21,7 +21,8 @@ func main() {
         fmt.Println("2) List Contacts")
         fmt.Println("3) Search Contact")
         fmt.Println("4) Delete Contact")
-        fmt.Println("5) Exit\n")
+        fmt.Println("5) Exit")
+        fmt.Println("")
         fmt.Print("Choose an option: ")
 
         choiceStr, _ := reader.ReadString('\n')
@@ -48,11 +49,13 @@ func main() {
             newContact := contacts.Contact{Name: name, Phone: phone}
             contactList = append(contactList, newContact)
             contacts.SaveContacts(file, contactList)
-            fmt.Println("Contact added.\n")
+            fmt.Println("Contact added.")
+            fmt.Println("")
 
         case 2:
             if len(contactList) == 0 {
-                fmt.Println("No contacts found.\n")
+                fmt.Println("No contacts found.")
+                fmt.Println("")
             } else {
                 for index, contact := range contactList {
                     fmt.Printf("%d. Name: %s, Phone: %s\n", index+1, contact.Name, contact.Phone)
@@ -79,7 +82,8 @@ func main() {
 
         case 4:
             if len(contactList) == 0 {
-                fmt.Println("No contacts to delete\n")
+                fmt.Println("No contacts to delete")
+                fmt.Println("")
             } else {
                 for index, contact := range contactList {
                     fmt.Printf("%d. Name: %s, Phone: %s\n", index+1, contact.Name, contact.Phone)
@@ -89,11 +93,13 @@ func main() {
                 delStr = strings.TrimSpace(delStr)
                 delIndex, err := strconv.Atoi(delStr)
                 if err != nil || delIndex < 1 || delIndex > len(contactList) {
-                    fmt.Println("Invalid contact number.\n")
+                    fmt.Println("Invalid contact number.")
+                    fmt.Println("")
                 } else {
                     contactList = append(contactList[:delIndex-1], contactList[delIndex:]...)
                     contacts.SaveContacts(file, contactList)
-                    fmt.Println("Contact deleted.\n")
+                    fmt.Println("Contact deleted.")
+                    fmt.Println("")
                 }
             }
 
@@ -101,7 +107,8 @@ func main() {
             fmt.Println("Goodbye!")
             return
         default:
-            fmt.Println("Invalid option.\n")
+            fmt.Println("Invalid option.")
+            fmt.Println("")
         }
 
         fmt.Println("Press enter to continue...")
