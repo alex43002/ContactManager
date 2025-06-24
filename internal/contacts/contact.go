@@ -1,4 +1,4 @@
-package main
+package contacts
 
 type Contact struct{
 	Name string
