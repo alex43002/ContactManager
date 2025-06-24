@@ -37,7 +37,6 @@ jobs:
         fi
 
     - name: Upload coverage report
-      shell: bash
       if: always()
       uses: actions/upload-artifact@v4
       with:
